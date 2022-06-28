@@ -405,7 +405,7 @@
 
     <include>
       <name>Vessel A</name>
-      <pose>-1400 20 0.3 0 0.0 -1.0</pose>
+      <pose>-1450.76 -12.5 0.3 0 0.0 0.0</pose>
       <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/Vessel A</uri>
       <plugin
         filename="libSurface.so"
@@ -477,7 +477,8 @@
 
     <include>
       <name>Vessel B</name>
-      <pose>0 0 0.4 0 0.0 0.0</pose>
+      <pose>-1430.76 -15.5 0.3 0 0.0 0.0</pose>
+      <!-- <pose>0 0 0.4 0 0.0 0.0</pose> -->
       <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/Vessel B</uri>
       <plugin
         filename="libSurface.so"
@@ -549,6 +550,7 @@
 
     <include>
       <name>Vessel C</name>
+      <!-- <pose>-1450.76 -9.5 0.3 0 0.0 0.0</pose> -->
       <pose>400 -1000 0.4 0 0.0 0.0</pose>
       <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/Vessel C</uri>
       <plugin
@@ -621,6 +623,7 @@
 
     <include>
       <name>Vessel D</name>
+      <!-- <pose>-1450.76 -6.5 0.3 0 0.0 0.0</pose> -->
       <pose>1000 1200 0.4 0 0.0 0.0</pose>
       <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/Vessel D</uri>
       <plugin
@@ -694,6 +697,7 @@
 
     <include>
       <name>Vessel E</name>
+      <!-- <pose>-1450.76 -20.5 0.3 0 0.0 0.0</pose> -->
       <pose>-1000 -500 0.3 0 0.0 0.0</pose>
       <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/Vessel E</uri>
       <plugin
@@ -766,6 +770,7 @@
 
     <include>
       <name>Vessel F</name>
+      <!-- <pose>-1450.76 -23.5 0.3 0 0.0 0.0</pose> -->
       <pose>-100 600 0.3 0 0.0 0.0</pose>
       <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/Vessel F</uri>
       <plugin
@@ -838,7 +843,8 @@
 
     <include>
       <name>Vessel G</name>
-      <pose>-900 1000 0.4 0 0.0 0.0</pose>
+      <pose>-1450.76 -25.5 0.3 0 0.0 0.0</pose>
+      <!-- <pose>-900 1000 0.4 0 0.0 0.0</pose> -->
       <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/Vessel G</uri>
       <plugin
         filename="libSurface.so"
@@ -1196,6 +1202,7 @@
       <uri>
         https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Small Dry Bag Handle
       </uri>
+      <mass>0.1</mass>
     </include>
     <include>
       <name>small_dry_bag_handle_g_duplicate</name>
@@ -1203,6 +1210,7 @@
       <uri>
         https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Small Dry Bag Handle
       </uri>
+      <mass>0.1</mass>
       <plugin filename="ignition-gazebo-detachable-joint-system" name="ignition::gazebo::systems::DetachableJoint">
        <parent_link>link</parent_link>
        <child_model>small_dry_bag_handle_g</child_model>
@@ -1210,6 +1218,23 @@
        <topic>/Vessel_G/detach</topic>
       </plugin>
     </include>
+    <include>
+      <name>small_dry_bag_handle_g_demo</name>
+      <pose>-1488.88 -15.07 4.4 0 0 0.0</pose>
+      <uri>
+        https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Small Dry Bag Handle
+      </uri>
+      <mass>0.1</mass>
+    </include>
+    <include>
+      <name>small_dry_bag_handle_g_demo1</name>
+      <pose>-1488.88 -14.07 4.4 0 0 0.0</pose>
+      <uri>
+        https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Small Dry Bag Handle
+      </uri>
+      <mass>1</mass>
+    </include>
+
     <include>
       <name>large_crate_g</name>
       <pose relative_to="Vessel G">-4.75 0.81 1.4794 0 0 -1.3</pose>
@@ -1224,11 +1249,44 @@
       </plugin>
     </include>
     <include>
-      <name>large_crate_g_duplicate</name>
-      <pose relative_to="Vessel G">-3.48 -1.624 1.4305 0 0 0.0</pose>
+      <name>large_box_handle_g_demo</name>
+      <pose>-1488.88 -16.07 4.4 0 0 0.0</pose>
+      <uri>
+        https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Large Dry Box Handles
+      </uri>
+      <mass>0.1</mass>
+    </include>
+    <include>
+      <name>large_box_handle_g_demo1</name>
+      <pose>-1488.88 -17.07 4.4 0 0 0.0</pose>
+      <uri>
+        https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Large Dry Box Handles
+      </uri>
+    </include>
+    <include>
+      <name>large_crate_g_demo</name>
+      <pose>-1486.88 -16.07 4.4 0 0 0.0</pose>
       <uri>
         https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Large Crate
       </uri>
+      <mass>0.1</mass>
+    </include>
+    <include>
+      <name>large_crate_g_demo1</name>
+      <pose>-1486.88 -17.07 4.4 0 0 0.0</pose>
+      <uri>
+        https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Large Crate
+      </uri>
+    </include>
+
+    <include>
+      <name>large_crate_g_duplicate</name>
+      <pose relative_to="Vessel G">-3.48 -1.624 1.4305 0 0 0.0</pose>
+      <uri>
+        https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Large Dry Box Handles
+        <!-- https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Large Crate -->
+      </uri>
+      <mass>0.1</mass>
       <plugin filename="ignition-gazebo-detachable-joint-system" name="ignition::gazebo::systems::DetachableJoint">
        <parent_link>link</parent_link>
        <child_model>large_crate_g</child_model>
