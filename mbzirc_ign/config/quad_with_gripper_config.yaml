@@ -1,0 +1,33 @@
+---
+model_name: 'quad_1'
+model_type: 'mbzirc_quadrotor'
+flight_time: 15
+position:
+  xyz: [20.0, 20.0, 1.0]
+  rpy: [0, 0, 0]
+payload:
+  slot0: # front
+    sensor: 'mbzirc_rgbd_camera'
+    rpy: [0, 0.0, 0]
+  slot1: # rear
+    sensor: 'mbzirc_rgbd_camera'
+    rpy: [0, 0.0, 0.0]
+  slot2: # top
+    sensor: 'None'
+    rpy: [0, 0, 0]
+  slot3: # bottom
+    sensor: 'mbzirc_rgbd_camera'
+    rpy: [0, 0.0, 0.0]
+  slot4: # left
+    sensor: 'None'
+    rpy: [0, 0, 0]
+  slot5: # right
+    sensor: 'None'
+    rpy: [0, 0, 0]
+  slot6: # bottom left
+    sensor: 'None'
+    rpy: [0, 0, 0]
+  slot7: # bottom right
+    sensor: 'None'
+    rpy: [0, 0, 0]
+gripper: mbzirc_suction_gripper
