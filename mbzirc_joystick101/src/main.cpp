@@ -14,7 +14,6 @@ void SigIntHandler(int param)
  * main()
  * Main function to set up ROS node.
  *------------------------------------------------------------------*/
-
 int main(int argc, char** argv)
 {
   // Set up ROS2

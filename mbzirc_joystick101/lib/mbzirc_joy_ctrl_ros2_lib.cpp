@@ -3,20 +3,23 @@
 using namespace std;
 using namespace rclcpp;
 
-MbzircJoyCtrlRos2::MbzircJoyCtrlRos2(const std::string& nodeName, const rclcpp::NodeOptions& options, int nHz)
-  : Node(nodeName, options)
+MbzircJoyCtrlRos2::MbzircJoyCtrlRos2(const std::string& nodeName, const rclcpp::NodeOptions& options, const int nHz)
+  : Node(nodeName, options), nHz_(nHz)
 {
-  // setting the nodeHandle
+  // using other class--->handover the nodeHandle
   nodeHandle_ = std::shared_ptr<::rclcpp::Node>(this, [](::rclcpp::Node*) {});
 
-  // using other class--->handover the nodeHandle
   // setting the configuration class
-  cfg_ = new ConfigParam(nodeHandle_);
-  if (!cfg_->GetRosParams())
+  cfgParam_ = new ConfigParam(nodeHandle_);
+  if (!cfgParam_->GetRosParams())
     RCLCPP_ERROR(this->get_logger(), "Wrong params!! Please check the parameter sheet..");
 
+  // setting the misc function class
+  misc_ = new MiscFunc(*cfgParam_);
+  joyXbox360_ = new JoyXBox360(nodeHandle_, *cfgParam_, 30);
+
   // making the main loop
-  timer_ = this->create_wall_timer(std::chrono::milliseconds((int)((1 / nHz) * 1000)),
+  timer_ = this->create_wall_timer(std::chrono::milliseconds((int)((1 / nHz_) * 1000)),
                                    std::bind(&MbzircJoyCtrlRos2::MainTimerCbLoop, this));
 }
 

@@ -5,9 +5,6 @@ using namespace rclcpp;
 
 ConfigParam::ConfigParam(const std::shared_ptr<rclcpp::Node>& parentNode) : parentNode_(parentNode)
 {
-  int nXbox360AuxilChannelPitch = 0;
-  parentNode_->get_parameter("Joystick.XBox360.auxil.channel.pitch", nXbox360AuxilChannelPitch);
-  printf("nXbox360AuxilChannelPitch:%d\n", nXbox360AuxilChannelPitch);
 }
 
 ConfigParam::~ConfigParam()
