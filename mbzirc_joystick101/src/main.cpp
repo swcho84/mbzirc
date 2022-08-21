@@ -28,7 +28,7 @@ int main(int argc, char** argv)
   // setting the node (nodeName, nodeOptions, Hz)
   auto node = std::make_shared<MbzircJoyCtrlRos2>("mbzirc_joystick101_node", options, 30);
   signal(SIGINT, SigIntHandler);
-  
+
   spin(node);
   shutdown();
 

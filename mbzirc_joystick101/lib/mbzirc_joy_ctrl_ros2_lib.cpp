@@ -6,19 +6,18 @@ using namespace rclcpp;
 MbzircJoyCtrlRos2::MbzircJoyCtrlRos2(const std::string& nodeName, const rclcpp::NodeOptions& options, int nHz)
   : Node(nodeName, options)
 {
-	// setting the nodeHandle
+  // setting the nodeHandle
   nodeHandle_ = std::shared_ptr<::rclcpp::Node>(this, [](::rclcpp::Node*) {});
 
-	// using other class--->handover the nodeHandle
-	// setting the configuration class
+  // using other class--->handover the nodeHandle
+  // setting the configuration class
   cfg_ = new ConfigParam(nodeHandle_);
   if (!cfg_->GetRosParams())
     RCLCPP_ERROR(this->get_logger(), "Wrong params!! Please check the parameter sheet..");
 
-	// making the main loop
+  // making the main loop
   timer_ = this->create_wall_timer(std::chrono::milliseconds((int)((1 / nHz) * 1000)),
                                    std::bind(&MbzircJoyCtrlRos2::MainTimerCbLoop, this));
-
 }
 
 MbzircJoyCtrlRos2::~MbzircJoyCtrlRos2()

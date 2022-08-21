@@ -28,28 +28,27 @@ public:
   ConfigParam(const std::shared_ptr<rclcpp::Node>& parentNode);
   ~ConfigParam();
 
-  bool GetRosParams();	
+  bool GetRosParams();
 
-	JoyRaw joyCfgXbox;
+  JoyRaw joyCfgXbox;
 
-	string strJoyTpNm;
+  string strJoyTpNm;
 
-	float fAttPsi;
+  float fAttPsi;
 
 private:
   std::shared_ptr<rclcpp::Node> parentNode_;
 
-	CtrlRefScale joyMoveScale_;
+  CtrlRefScale joyMoveScale_;
 
-	string strHomeName_;
+  string strHomeName_;
 
-	bool ReadRosParams();
+  bool ReadRosParams();
   void ReadRosParam(const string& key, float& val);
   void ReadRosParam(const string& key, double& val);
   void ReadRosParam(const string& key, bool& val);
   void ReadRosParam(const string& key, int32_t& val);
   void ReadRosParam(const string& key, string& val);
-
 };
 
 #endif

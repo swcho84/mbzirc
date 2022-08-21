@@ -49,7 +49,7 @@ bool ConfigParam::ReadRosParams()
     fAttPsi = (fAttPsi) * (D2R);
     joyMoveScale_.fAttPhi = (joyMoveScale_.fAttPhi) * (D2R);
     joyMoveScale_.fAttTheta = (joyMoveScale_.fAttTheta) * (D2R);
-    joyMoveScale_.fAttRatePsi = (joyMoveScale_.fAttRatePsi) * (D2R);		
+    joyMoveScale_.fAttRatePsi = (joyMoveScale_.fAttRatePsi) * (D2R);
 
     // reading parameters, w.r.t the xbox360 wired controller
     ReadRosParam("Joystick.XBox360.channel.roll", joyCfgXbox.ctrlMove.nRollChannel);
