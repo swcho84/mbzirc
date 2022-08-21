@@ -1,0 +1,54 @@
+obsv_drone:  # using ros2 namespace 
+  mbzirc_joystick101_node:  # node name
+    ros__parameters:    # default command for reading params
+      Joystick:
+        joyTopicName: "/joy"
+        
+        commandParam:
+          scaleRPAtt:
+            roll: 1.0        
+            pitch: 1.0       
+          scaleYawAtt:
+            yaw: 1.0         
+          scaleRPAuxAttAccum:
+            roll: 0.01
+            pitch: 0.01      
+          scaleRPAuxAttMax:
+            roll: 1.0
+            pitch: 1.0
+          scaleYawAuxMinMaxResol:
+            min: 0.0
+            max: 1.0
+            resol: 100
+          scaleThrottleMinMaxResol:
+            min: 0.0
+            max: 1.0
+            resol: 100
+          scaleYawRate: 1.0    
+          scaleHeaveVel: 5.0   
+
+        XBox360:  # just usb connection: wired joystick
+          channel:
+            roll: 2
+            pitch: 1
+            yaw: 0 
+            throttle: 3
+          auxil:
+            channel:
+              roll: 6
+              pitch: 7
+              yawleft: 5
+              yawright: 4
+            direction:
+              yawleft: 1.0
+              yawright: 1.0   # shutter command
+          direction:
+            roll: -1.0
+            pitch: -1.0
+            yaw: -1.0
+            throttle: 1.0
+          button:
+            triggerAuto: 10    # right z-axis button
+            triggerJoy: 9      # left z-axis button
+            triggerRgear: 4    # left side button
+            triggerDgear: 5    # right side button
