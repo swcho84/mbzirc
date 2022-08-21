@@ -39,7 +39,6 @@ def generate_launch_description():
       namespace=LaunchConfiguration('ns'),
       name='mbzirc_joystick101_node',
       output='screen',
-      arguments=['--ros-args', '--log-level', 'ERROR'],
       emulate_tty=True,
       parameters=[config_filepath]
     )

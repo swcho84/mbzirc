@@ -3,8 +3,8 @@
 using namespace std;
 using namespace rclcpp;
 
-MbzircJoyCtrlRos2::MbzircJoyCtrlRos2(const std::string& nodeName, const rclcpp::NodeOptions& options, const int nHz)
-  : Node(nodeName, options), nHz_(nHz)
+MbzircJoyCtrlRos2::MbzircJoyCtrlRos2(const std::string& nodeName, const rclcpp::NodeOptions& options)
+  : Node(nodeName, options)
 {
   // using other class--->handover the nodeHandle
   nodeHandle_ = std::shared_ptr<::rclcpp::Node>(this, [](::rclcpp::Node*) {});
@@ -17,9 +17,10 @@ MbzircJoyCtrlRos2::MbzircJoyCtrlRos2(const std::string& nodeName, const rclcpp::
   // setting the misc function class
   misc_ = new MiscFunc(*cfgParam_);
   joyXbox360_ = new JoyXBox360(nodeHandle_, *cfgParam_, 30);
+  joyMbzDroneCtrlCmd_ = std::make_shared<JoyCtrlCmd>();
 
   // making the main loop
-  timer_ = this->create_wall_timer(std::chrono::milliseconds((int)((1 / nHz_) * 1000)),
+  timer_ = this->create_wall_timer(std::chrono::milliseconds((int)((1 / 1.9) * 100)),
                                    std::bind(&MbzircJoyCtrlRos2::MainTimerCbLoop, this));
 }
 
@@ -30,9 +31,19 @@ MbzircJoyCtrlRos2::~MbzircJoyCtrlRos2()
 // main loop, made by timer
 void MbzircJoyCtrlRos2::MainTimerCbLoop()
 {
-  auto steadyClock = rclcpp::Clock();  // [milliseconds]
-  // RCLCPP_DEBUG_STREAM_THROTTLE(this->get_logger(), steadyClock, 1000, "[DEBUG]Hello, world! ROS2!");
-  // RCLCPP_WARN_STREAM_THROTTLE(this->get_logger(), steadyClock, 1000, "[WARN]Hello, world! ROS2!");
-  // RCLCPP_ERROR_STREAM_THROTTLE(this->get_logger(), steadyClock, 1000, "[ERROR]Hello, world! ROS2!");
-  // RCLCPP_FATAL_STREAM_THROTTLE(this->get_logger(), steadyClock, 1000, "[FATAL]Hello, world! ROS2!");
+  joyMbzDroneCtrlCmd_ = (joyXbox360_->GenJoyInfoLoop());
+
+  // for debugging
+  RCLCPP_INFO(this->get_logger(), "rpy:(%.4lf,%.4lf,%.4lf)", joyMbzDroneCtrlCmd_->ctrlMove.fRoll,
+              joyMbzDroneCtrlCmd_->ctrlMove.fPitch, joyMbzDroneCtrlCmd_->ctrlMove.fYaw);
+  RCLCPP_INFO(this->get_logger(), "thr:(%.4lf)", joyMbzDroneCtrlCmd_->ctrlMove.fThr);
+  RCLCPP_INFO(this->get_logger(), "rp_accum:(%.4lf,%.4lf)", joyMbzDroneCtrlCmd_->ctrlAuxMove.fRoll,
+              joyMbzDroneCtrlCmd_->ctrlAuxMove.fPitch);
+  RCLCPP_INFO(this->get_logger(), "autojoy:(%d,%d)", (int)(joyMbzDroneCtrlCmd_->bCtrlAutoMode),
+              (int)(joyMbzDroneCtrlCmd_->bCtrlJoyMode));
+  RCLCPP_INFO(this->get_logger(), "rd_gear:(%d,%d)", joyMbzDroneCtrlCmd_->nRgearStatus,
+              joyMbzDroneCtrlCmd_->nDgearStatus);
+  RCLCPP_INFO(this->get_logger(), " ");
+  RCLCPP_INFO(this->get_logger(), " ");
+  RCLCPP_INFO(this->get_logger(), " ");
 }

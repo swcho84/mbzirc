@@ -37,7 +37,7 @@
 #include <rclcpp/rclcpp.hpp>
 
 // for using joystick
-#include <sensor_msgs/msg/joy.h>
+#include "sensor_msgs/msg/joy.hpp"
 
 using namespace std;
 using namespace rclcpp;

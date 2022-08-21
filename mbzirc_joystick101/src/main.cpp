@@ -25,7 +25,7 @@ int main(int argc, char** argv)
   options.automatically_declare_parameters_from_overrides(true);
 
   // setting the node (nodeName, nodeOptions, Hz)
-  auto node = std::make_shared<MbzircJoyCtrlRos2>("mbzirc_joystick101_node", options, 30);
+  auto node = std::make_shared<MbzircJoyCtrlRos2>("mbzirc_joystick101_node", options);
   signal(SIGINT, SigIntHandler);
 
   spin(node);

@@ -12,7 +12,7 @@ using namespace rclcpp;
 class MbzircJoyCtrlRos2 : public Node
 {
 public:
-  MbzircJoyCtrlRos2(const std::string& nodeName, const rclcpp::NodeOptions& options, const int nHz);
+  MbzircJoyCtrlRos2(const std::string& nodeName, const rclcpp::NodeOptions& options);
   ~MbzircJoyCtrlRos2();
 
 private:
@@ -22,9 +22,9 @@ private:
 
   JoyXBox360* joyXbox360_;
 
-  TimerBase::SharedPtr timer_;
+  std::shared_ptr<JoyCtrlCmd> joyMbzDroneCtrlCmd_;
 
-  int nHz_;
+  TimerBase::SharedPtr timer_;
 
   void MainTimerCbLoop();
 };

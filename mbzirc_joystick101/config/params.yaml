@@ -2,7 +2,7 @@ obsv_drone:  # using ros2 namespace
   mbzirc_joystick101_node:  # node name
     ros__parameters:    # default command for reading params
       Joystick:
-        joyTopicName: "/joy"
+        joyTopicName: "/obsv_drone/joy"
         
         commandParam:
           scaleRPAtt:
