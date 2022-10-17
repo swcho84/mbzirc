@@ -38,6 +38,8 @@ include_directories(
 add_executable(mbzirc_joystick101_node src/main.cpp 
 lib/mbzirc_joy_ctrl_ros2_lib.cpp 
 include/mbzirc_joy_ctrl_ros2_lib.h
+lib/mbzirc_quad_imu_data_lib.cpp
+include/mbzirc_quad_imu_data_lib.h 
 lib/joy_xbox360_lib.cpp
 include/joy_xbox360_lib.h 
 lib/config_param.cpp

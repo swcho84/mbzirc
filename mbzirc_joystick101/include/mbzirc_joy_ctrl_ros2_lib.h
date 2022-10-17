@@ -3,6 +3,7 @@
 
 #include "global_header.h"
 #include "joy_xbox360_lib.h"
+#include "mbzirc_quad_imu_data_lib.h"
 #include "config_param.h"
 #include "misc_func.h"
 
@@ -21,8 +22,9 @@ private:
   MiscFunc* misc_;
 
   JoyXBox360* joyXbox360_;
+  MbzQuadImuData* mbzQuad1ImuData_;
 
-  std::shared_ptr<JoyCtrlCmd> joyMbzDroneCtrlCmd_;
+  std::shared_ptr<JoyCtrlCmd> currJoyMbzDroneCtrlCmd_;
 
   TimerBase::SharedPtr timer_;
 

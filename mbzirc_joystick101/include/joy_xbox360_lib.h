@@ -27,7 +27,7 @@ private:
   JoyCtrlCmd GenJoyCtrlAxisRefInfo(JoyRaw param, const sensor_msgs::msg::Joy::SharedPtr joyRaw, JoyCtrlCmd res);
   JoyCtrlCmd GenJoyCtrlBtnsRefInfo(JoyRaw param, const sensor_msgs::msg::Joy::SharedPtr joyRaw, JoyCtrlCmd res);
 
-  JoyCtrlCmd joyCtrlRef_;
+  JoyCtrlCmd currJoyCtrlRef_;
 
   int nHz_;
 

@@ -30,9 +30,15 @@ public:
 
   bool GetRosParams();
 
+  int nMainLoopHz;
+
   JoyRaw joyCfgXbox;
 
   string strJoyTpNm;
+  int nJoyNodeHz;
+
+  string strQuadImuTpNm;
+  int nQuadImuNodeHz;
 
   float fAttPsi;
 

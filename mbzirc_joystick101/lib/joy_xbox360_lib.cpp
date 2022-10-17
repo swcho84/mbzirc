@@ -7,16 +7,16 @@ JoyXBox360::JoyXBox360(const std::shared_ptr<rclcpp::Node>& parentNode, const Co
   : parentNode_(parentNode), cfgParam_(cfg), misc_(cfg), nHz_(nHz)
 {
   // generating subscriber, joy node
-  RCLCPP_INFO(parentNode_->get_logger(), "Subscriber::%s", cfgParam_.strJoyTpNm.c_str());
+  RCLCPP_INFO(parentNode_->get_logger(), "Subscriber::JOY::%s", cfgParam_.strJoyTpNm.c_str());
   auto qosJoyRaw = rclcpp::QoS(rclcpp::KeepLast(1)).best_effort();
   subJoyRaw_ = parentNode_->create_subscription<sensor_msgs::msg::Joy>(
       cfgParam_.strJoyTpNm, qosJoyRaw, std::bind(&JoyXBox360::CbJoyRaw, this, std::placeholders::_1));
 
   // setting the initialized value
-  joyCtrlRef_.ctrlAuxMove.fRoll = 0.0f;
-  joyCtrlRef_.ctrlAuxMove.fPitch = 0.0f;
-  joyCtrlRef_.ctrlAuxMove.fYawLt = 0.0f;
-  joyCtrlRef_.ctrlAuxMove.fYawRt = 0.0f;
+  currJoyCtrlRef_.ctrlAuxMove.fRoll = 0.0f;
+  currJoyCtrlRef_.ctrlAuxMove.fPitch = 0.0f;
+  currJoyCtrlRef_.ctrlAuxMove.fYawLt = 0.0f;
+  currJoyCtrlRef_.ctrlAuxMove.fYawRt = 0.0f;
   bPrevUseExtGuidLoop_ = false;
   bPrevUseJoyConLoop_ = true;
 }
@@ -25,12 +25,18 @@ JoyXBox360::~JoyXBox360()
 {
 }
 
+// generating the joystick control reference information, global
+std::shared_ptr<JoyCtrlCmd> JoyXBox360::GenJoyInfoLoop()
+{
+  return std::make_shared<JoyCtrlCmd>(currJoyCtrlRef_);
+}
+
 // callback function, raw joystick input
 void JoyXBox360::CbJoyRaw(const sensor_msgs::msg::Joy::SharedPtr msgRaw)
 {
   // generating the joystick control reference information, axes and buttons
-  joyCtrlRef_ = GenJoyCtrlAxisRefInfo(cfgParam_.joyCfgXbox, msgRaw, joyCtrlRef_);
-  joyCtrlRef_ = GenJoyCtrlBtnsRefInfo(cfgParam_.joyCfgXbox, msgRaw, joyCtrlRef_);
+  currJoyCtrlRef_ = GenJoyCtrlAxisRefInfo(cfgParam_.joyCfgXbox, msgRaw, currJoyCtrlRef_);
+  currJoyCtrlRef_ = GenJoyCtrlBtnsRefInfo(cfgParam_.joyCfgXbox, msgRaw, currJoyCtrlRef_);
 
   // for debugging
   // RCLCPP_INFO(parentNode_->get_logger(), "rpy:(%.4lf,%.4lf,%.4lf)", joyCtrlRef_.ctrlMove.fRoll,
@@ -41,12 +47,6 @@ void JoyXBox360::CbJoyRaw(const sensor_msgs::msg::Joy::SharedPtr msgRaw)
   // (int)(joyCtrlRef_.bCtrlAutoMode), (int)(joyCtrlRef_.bCtrlJoyMode));
   // RCLCPP_INFO(parentNode_->get_logger(),"rd_gear:(%d,%d)", joyCtrlRef_.nRgearStatus, joyCtrlRef_.nDgearStatus);
   // RCLCPP_INFO(parentNode_->get_logger()," ");
-}
-
-// generating the joystick control reference information, global
-std::shared_ptr<JoyCtrlCmd> JoyXBox360::GenJoyInfoLoop()
-{
-  return std::make_shared<JoyCtrlCmd>(joyCtrlRef_);
 }
 
 // generating the joystick control reference information, buttons

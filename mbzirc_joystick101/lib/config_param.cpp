@@ -26,7 +26,13 @@ bool ConfigParam::ReadRosParams()
     strHomeName_ = getenv("HOME");
 
     // reading parameters
+    ReadRosParam("mainLoopHz", nMainLoopHz);
+
+    ReadRosParam("QuadImu.imuTopicName", strQuadImuTpNm);
+    ReadRosParam("QuadImu.workHz", nJoyNodeHz);
+
     ReadRosParam("Joystick.joyTopicName", strJoyTpNm);
+    ReadRosParam("Joystick.workHz", nQuadImuNodeHz);    
 
     ReadRosParam("Joystick.commandParam.scaleRPAtt.roll", joyMoveScale_.fAttPhi);
     ReadRosParam("Joystick.commandParam.scaleRPAtt.pitch", joyMoveScale_.fAttTheta);

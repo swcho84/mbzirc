@@ -39,8 +39,12 @@
 // for using joystick
 #include "sensor_msgs/msg/joy.hpp"
 
+// for using imu data
+#include "sensor_msgs/msg/imu.hpp"
+
 using namespace std;
 using namespace rclcpp;
+using namespace Eigen;
 
 #define PI 3.141592
 #define R2D 180.0 / PI
@@ -122,5 +126,13 @@ typedef struct
   int nRgearStatus;
   int nDgearStatus;
 } JoyCtrlCmd;
+
+typedef struct
+{
+  Quaterniond quat;
+  Vector3d acc;
+  Vector3d eulerAng;
+  Vector3d eulerRate;
+} EulerImuData;
 
 #endif  // MBZIRC_JOYSTICK101_GLOBAL_HEADER_H

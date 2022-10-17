@@ -1,9 +1,16 @@
 obsv_drone:  # using ros2 namespace 
   mbzirc_joystick101_node:  # node name
     ros__parameters:    # default command for reading params
+      mainLoopHz: 100
+
+      QuadImu:
+        imuTopicName: "/quad_1/imu/data"
+        workHz: 25
+
       Joystick:
         joyTopicName: "/obsv_drone/joy"
-        
+        workHz: 100
+
         commandParam:
           scaleRPAtt:
             roll: 1.0        
